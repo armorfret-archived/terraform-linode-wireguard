@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-DEPLOY_DIR=/opt/algo
+DEPLOY_DIR=/opt/deploy
 (
     cd "$DEPLOY_DIR"
     git pull
