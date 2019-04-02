@@ -42,7 +42,7 @@ resource "null_resource" "configuration" {
   }
 
   provisioner "local-exec" {
-    command     = "${path.module}/assets/download.sh"
+    command     = "${path.module}/assets/download.rb"
     working_dir = "${path.root}"
 
     environment = {
