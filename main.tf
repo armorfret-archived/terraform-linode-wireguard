@@ -9,7 +9,7 @@ data "template_file" "config" {
 
 module "vm" {
   source          = "armorfret/wireguard-base/linode"
-  version         = "0.0.5"
+  version         = "0.0.6"
   name            = "${var.name}"
   ssh_keys        = ["${var.ssh_keys}"]
   ssh_users       = ["${var.ssh_users}"]
