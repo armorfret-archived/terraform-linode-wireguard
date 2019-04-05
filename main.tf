@@ -37,7 +37,7 @@ resource "null_resource" "configuration" {
   }
 
   provisioner "file" {
-    content     = "${data.template_file.config.rendered}"
+    content     = "${data.template_file.users.rendered}"
     destination = "/opt/wireguard/users.cfg"
   }
 
