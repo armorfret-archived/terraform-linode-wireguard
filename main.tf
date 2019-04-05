@@ -32,6 +32,12 @@ resource "null_resource" "configuration" {
     host = "${module.vm.ip_address}"
   }
 
+  provisioner "remote-exec" {
+    inline = [
+      "mkdir -p /opt/deploy",
+    ]
+  }
+
   provisioner "file" {
     content     = "${data.template_file.config.rendered}"
     destination = "/opt/deploy/config.cfg"
@@ -47,6 +53,7 @@ resource "null_resource" "configuration" {
     defaults {
       extra_vars = {
         ansible_python_interpreter = "/usr/bin/python3"
+        tags                       = "users"
       }
     }
 
