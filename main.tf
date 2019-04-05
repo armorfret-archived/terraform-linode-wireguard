@@ -7,8 +7,8 @@ data "template_file" "users" {
 }
 
 resource "local_file" "users" {
-  content     = "${data.template_file.users.rendered}"
-  destination = "${path.root}/.configs/${var.name}.cfg"
+  content  = "${data.template_file.users.rendered}"
+  filename = "${path.root}/.configs/${var.name}.cfg"
 }
 
 module "vm" {
