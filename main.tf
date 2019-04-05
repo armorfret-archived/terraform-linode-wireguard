@@ -1,3 +1,11 @@
+data "template_file" "users" {
+  template = "${file("${path.module}/assets/users.cfg")}"
+
+  vars {
+    users = "${jsonencode(var.users)}"
+  }
+}
+
 module "vm" {
   source            = "armorfret/wireguard-base/linode"
   version           = "0.0.8"
@@ -22,6 +30,17 @@ resource "null_resource" "configuration" {
     host = "${module.vm.ip_address}"
   }
 
+  provisioner "remote-exec" {
+    inline = [
+      "mkdir -p /opt/wireguard",
+    ]
+  }
+
+  provisioner "file" {
+    content     = "${data.template_file.config.rendered}"
+    destination = "/opt/wireguard/users.cfg"
+  }
+
   provisioner "ansible" {
     plays {
       playbook = {
@@ -34,7 +53,7 @@ resource "null_resource" "configuration" {
       extra_vars = {
         ansible_python_interpreter = "/usr/bin/python3"
         wireguard_config_path      = "/opt/wireguard"
-        users                      = "${var.users}"
+        user_config_file           = "/opt/wireguard/users.cfg"
       }
     }
   }
