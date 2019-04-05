@@ -43,3 +43,8 @@ variable "image_id" {
   default     = "linode/ubuntu18.04"
   description = "Source image to build on"
 }
+
+variable "ansible_repo_path" {
+  type        = "string"
+  description = "Path to deploy-wireguard-server repo"
+}

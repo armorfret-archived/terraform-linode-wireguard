@@ -1,6 +1,3 @@
 [submodule "scripts"]
 	path = scripts
 	url = https://github.com/armorfret/ci-helpers
-[submodule "ansible"]
-	path = ansible
-	url = https://github.com/akerl/deploy-wireguard-server
