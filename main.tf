@@ -26,13 +26,13 @@ resource "null_resource" "configuration" {
     plays {
       playbook = {
         file_path = "${var.ansible_repo_path}/main.yml"
+        tags      = ["users"]
       }
     }
 
     defaults {
       extra_vars = {
         ansible_python_interpreter = "/usr/bin/python3"
-        tags                       = "users"
         wireguard_config_path      = "/opt/wireguard"
         users                      = "${jsonencode(var.users)}"
       }
