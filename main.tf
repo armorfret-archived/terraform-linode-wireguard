@@ -15,7 +15,6 @@ module "vm" {
   ssh_users       = ["${var.ssh_users}"]
   region          = "${var.region}"
   type            = "${var.type}"
-  deploy_repo     = "${var.deploy_repo}"
   source_image_id = "${var.image_id}"
 }
 
@@ -51,6 +50,7 @@ resource "null_resource" "configuration" {
     }
 
     remote {
+      use_sudo            = false
       skip_install        = true
       bootstrap_directory = "/opt/deploy"
     }
