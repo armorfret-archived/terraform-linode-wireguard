@@ -34,7 +34,7 @@ resource "null_resource" "configuration" {
         ansible_python_interpreter = "/usr/bin/python3"
         tags                       = "users"
         wireguard_config_path      = "/opt/wireguard"
-        users                      = ["${var.users}"]
+        users                      = "${jsonencode(var.users)}"
       }
     }
   }
