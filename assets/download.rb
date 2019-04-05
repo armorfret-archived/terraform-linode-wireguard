@@ -8,7 +8,7 @@ vpn = {}
 end
 
 file_exts = %w(png conf)
-src_dir = "/opt/deploy/configs/#{vpn['ip_address']}/wireguard"
+src_dir = '/opt/wireguard'
 dest_dir = "configs/#{vpn['name']}"
 
 FileUtils.mkdir_p dest_dir

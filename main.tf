@@ -56,12 +56,6 @@ resource "null_resource" "configuration" {
         tags                       = "users"
       }
     }
-
-    remote {
-      use_sudo            = false
-      skip_install        = true
-      bootstrap_directory = "/opt/deploy"
-    }
   }
 
   provisioner "local-exec" {
