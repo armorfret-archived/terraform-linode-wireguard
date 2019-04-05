@@ -37,8 +37,23 @@ resource "null_resource" "configuration" {
     destination = "/opt/deploy/config.cfg"
   }
 
-  provisioner "remote-exec" {
-    script = "${path.module}/assets/deploy.sh"
+  provisioner "ansible" {
+    plays {
+      playbook = {
+        file_path = "${path.module}/ansible/main.yml"
+      }
+    }
+
+    defaults {
+      extra_vars = {
+        ansible_python_interpreter = "/usr/bin/python3"
+      }
+    }
+
+    remote {
+      skip_install        = true
+      bootstrap_directory = "/opt/deploy"
+    }
   }
 
   provisioner "local-exec" {
