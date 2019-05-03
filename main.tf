@@ -14,7 +14,7 @@ resource "linode_instance" "vpn" {
     stackscript_id  = "${var.stackscript_id}"
 
     stackscript_data = {
-      "users"       = "${var.users}"
+      "users"       = "${join(",", var.users)}"
       "deploy_repo" = "${var.deploy_repo}"
     }
   }
