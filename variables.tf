@@ -38,3 +38,8 @@ variable "image_id" {
   default     = "linode/ubuntu18.04"
   description = "Source image to build on"
 }
+
+variable "stackscript_id" {
+  type        = "string"
+  description = "Stackscript ID for wireguard deployment"
+}
