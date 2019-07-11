@@ -9,7 +9,7 @@ resource "linode_instance" "vpn" {
     size  = 10240
 
     // TODO: remove this
-    authorized_keys = ["${var.ssh_keys}"]
+    authorized_keys = var.ssh_keys
     image           = "${var.image_id}"
     stackscript_id  = "${var.stackscript_id}"
 
@@ -24,7 +24,7 @@ resource "linode_instance" "vpn" {
     kernel = "linode/grub2"
 
     devices {
-      sda = {
+      sda {
         disk_label = "root"
       }
     }
