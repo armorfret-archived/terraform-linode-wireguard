@@ -1,9 +1,11 @@
 Prospectus.extra_dep('file', 'prospectus_travis')
+Prospectus.extra_dep('file', 'prospectus_terraform')
 
 item do
   noop
 
   extend ProspectusTravis::Build.new('armorfret/terraform-linode-wireguard')
+  extend ProspectusTerraform::Modules.new
 
   deps do
     item do
