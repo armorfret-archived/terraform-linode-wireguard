@@ -11,7 +11,6 @@ Terraform module that creates a [Linode](https://linode.com) with [wireguard](ht
 module "vpn" {
   source  = "github.com/akerl/terraform-linode-wireguard"
   name = "vpn"
-  ssh_key = "PUT_YOUR_PUBKEY_HERE"
 
   users = [
     "alfa",
