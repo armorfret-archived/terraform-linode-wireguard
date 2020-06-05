@@ -1,0 +1,49 @@
+Prospectus.extra_dep('file', 'prospectus_travis')
+Prospectus.extra_dep('file', 'prospectus_terraform')
+
+item do
+  noop
+
+  extend ProspectusTravis::Build.new('armorfret/terraform-linode-wireguard')
+  extend ProspectusTerraform::Modules.new
+
+  deps do
+    item do
+      name 'terraform'
+
+      expected do
+        github_release
+        repo 'hashicorp/terraform'
+        regex /^v?([\d.]+)$/
+        filter /^v?([\d.]+)$/
+      end
+
+      actual do
+        grep
+        file '.travis.yml'
+        regex /^\s+- TERRAFORM_VERSION=([\d.]+)$/
+      end
+    end
+
+    raw = File.read('.gitmodules').split(/^\[.*\]$/).reject(&:empty?)
+    submodules = raw.map { |x| x.split("\n")[1, 2].map { |y| y.split(' ').last } }
+
+    submodules.each do |path, repo|
+      repo_name = repo.split('.com/').last
+
+      item do
+        name "dotfiles::#{repo_name}"
+
+        expected do
+          github_hash
+          repo repo_name
+        end
+
+        actual do
+          git_hash
+          dir path
+        end
+      end
+    end
+  end
+end
