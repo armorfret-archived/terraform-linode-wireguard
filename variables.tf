@@ -3,13 +3,6 @@ variable "name" {
   description = "The human-readable name for the server. Used when naming the Linode (with a suffix of '-wg')"
 }
 
-// TODO: remove this
-variable "ssh_keys" {
-  type        = list(string)
-  description = "SSH public keys used to log in as root to the server"
-  default     = []
-}
-
 variable "region" {
   type        = string
   default     = "us-central"
@@ -25,12 +18,6 @@ variable "type" {
 variable "users" {
   type        = list(string)
   description = "List of user accounts to provision for VPN access"
-}
-
-variable "deploy_repo" {
-  type        = string
-  default     = "https://github.com/akerl/deploy-wireguard-server"
-  description = "Repo to use for Ansible code"
 }
 
 variable "image_id" {

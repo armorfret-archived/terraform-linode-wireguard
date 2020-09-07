@@ -8,14 +8,11 @@ resource "linode_instance" "vpn" {
     label = "root"
     size  = 10240
 
-    // TODO: remove this
-    authorized_keys = var.ssh_keys
-    image           = var.image_id
-    stackscript_id  = var.stackscript_id
+    image          = var.image_id
+    stackscript_id = var.stackscript_id
 
     stackscript_data = {
-      "users"       = join(",", var.users)
-      "deploy_repo" = var.deploy_repo
+      "users" = join(",", var.users)
     }
   }
 
